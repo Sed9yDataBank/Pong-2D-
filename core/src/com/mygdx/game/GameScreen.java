@@ -5,7 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -27,18 +29,25 @@ public class GameScreen extends ScreenAdapter {
     private Ball ball;
     private Wall wallTop, wallBottom;
     private PlayerAI playerAI;
+    private GameContactListener gameContactListener;
+
+    private TextureRegion[] numbers;
+
     public GameScreen(OrthographicCamera camera) {
         this.camera = camera;
         this.camera.position.set(new Vector3(Boot.INSTANCE.getScreenWidth() / 2, Boot.INSTANCE.getScreenHeight() / 2, 0));
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0, 10), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
+        this.gameContactListener = new GameContactListener(this);
+        this.world.setContactListener(this.gameContactListener);
 
         this.player = new Player(16, Boot.INSTANCE.getScreenHeight() /2, this);
         this.playerAI = new PlayerAI(Boot.INSTANCE.getScreenWidth() - 16, Boot.INSTANCE.getScreenHeight() / 2, this);
         this.ball = new Ball(this);
         this.wallTop = new Wall(32, this);
         this.wallBottom = new Wall(Boot.INSTANCE.getScreenHeight() - 32, this);
+        this.numbers = loadTextureSprite("numbers.png", 10);
     }
 
     public void update () {
@@ -57,6 +66,8 @@ public class GameScreen extends ScreenAdapter {
 
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
             this.ball.reset();
+            this.player.setScore(0);
+            this.playerAI.setScore(0);
         }
 
     }
@@ -73,9 +84,27 @@ public class GameScreen extends ScreenAdapter {
         this.ball.render(batch);
         this.wallTop.render(batch);
         this.wallBottom.render(batch);
+
+        drawNumbers(batch, player.getScore(), 64, Boot.INSTANCE.getScreenHeight() - 55, 30, 42);
+        drawNumbers(batch, playerAI.getScore(), Boot.INSTANCE.getScreenWidth() - 96, Boot.INSTANCE.getScreenHeight() - 55, 30, 42);
+
         batch.end();
 
-        this.box2DDebugRenderer.render(world, camera.combined.scl(Const.PPM));
+        //this.box2DDebugRenderer.render(world, camera.combined.scl(Const.PPM));
+    }
+
+    private void drawNumbers(SpriteBatch batch, int number, float x, float y, float width, float height) {
+        if (number < 10) {
+            batch.draw(numbers[number], x, y, width, height);
+        }
+        else {
+            batch.draw(numbers[Integer.parseInt(("" + number).substring(0, 1))], x, y, width, height);
+            batch.draw(numbers[Integer.parseInt(("" + number).substring(1, 2))], x + 20, y, width, height);
+        }
+    }
+    private TextureRegion[] loadTextureSprite(String filename, int colums) {
+        Texture texture = new Texture(filename);
+        return TextureRegion.split(texture, texture.getWidth() / colums, texture.getHeight())[0];
     }
 
     public World getWorld() {

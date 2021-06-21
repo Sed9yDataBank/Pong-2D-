@@ -23,7 +23,7 @@ public abstract class PlayerPaddle {
         this.speed = 6;
         this.width = 16;
         this.height = 64;
-        this.texture = new Texture("white.png");
+        this.texture = new Texture("player.png");
         this.body = BodyHelper.createBody(x, y, width, height, false, 1000, gameScreen.getWorld(), ContactType.PLAYER);
     }
 
@@ -39,5 +39,13 @@ public abstract class PlayerPaddle {
 
     public void score() {
         this.score++;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

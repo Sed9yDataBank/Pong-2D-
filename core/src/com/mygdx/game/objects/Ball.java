@@ -24,7 +24,7 @@ public class Ball {
         this.velX = getRandomDirection();
         this.velY = getRandomDirection();
 
-        this.texture = new Texture("white.png");
+        this.texture = new Texture("ball.png");
 
         this.gameScreen = gameScreen;
         this.width = 32;

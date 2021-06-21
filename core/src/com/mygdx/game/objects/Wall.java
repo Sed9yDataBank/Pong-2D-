@@ -21,7 +21,7 @@ public class Wall {
         this.width = Boot.INSTANCE.getScreenWidth();
         this.height = 64;
 
-        this.texture = new Texture("white.png");
+        this.texture = new Texture("wall.png");
         this.body = BodyHelper.createBody(x,y, width, height, true, 0, gameScreen.getWorld(), ContactType.WALL);
 
     }

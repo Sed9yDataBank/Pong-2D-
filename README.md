@@ -10,6 +10,9 @@ Controls: W to go up, S to go down
 Ball speed increase by time and it becomes hard to dodge.\
 Ball directon is random.\
 There are walls on top and bottom.
+# Demo: (https://youtu.be/gMKn4mQy25c) 
+
+[![Demo Video](https://i.ibb.co/1Ln0wpH/Screen-Shot-2021-06-21-at-11-02-26-AM.png)](https://www.youtube.com/watch?v=gMKn4mQy25c)
 
 # Computer player logic:
 

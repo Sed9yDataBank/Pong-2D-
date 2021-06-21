@@ -14,6 +14,7 @@ There are walls on top and bottom.
 
 [![Demo Video](https://i.ibb.co/1Ln0wpH/Screen-Shot-2021-06-21-at-11-02-26-AM.png)](https://www.youtube.com/watch?v=gMKn4mQy25c)
 
+# Summary: https://docs.google.com/document/d/1fbveuaGQmXTbuSTTUDlR339WwkZnhBInN3RA6TL4IIY/edit?usp=sharing
 # Computer player logic:
 
 ``` Java

@@ -1,16 +1,17 @@
 # Pong 2D Game
-2D Pong game for desktop use, made using libGDX, Java
+# About: 2D Pong game for desktop use, made using libGDX, Java
 ![Screenshot](https://i.ibb.co/JRy6Cp2/Screen-Shot-2021-06-21-at-11-02-26-AM.png)
 
-Left side: we have computer player
-Right side: user player
+# Details: 
+Left side: we have computer player\
+Right side: user player\
 Controls: W to go up, S to go down
-Note: 
-Ball speed increase by time and it becomes hard to dodge. 
-Ball directon is random.
+# Note:
+Ball speed increase by time and it becomes hard to dodge.\
+Ball directon is random.\
 There are walls on top and bottom.
 
-Computer player logic:
+# Computer player logic:
 
 ``` Java
 public class PlayerAI extends PlayerPaddle {
